@@ -2,32 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* The max size of a command in system() call */
+#define MAX_CMD_LENGTH 1024
+
 char* profiles[] = {
   "gaming", "/usr/share/parch-profiles/gaming",
   "development", "/usr/share/parch-profiles/development"
 };
 
 void apply(const char* profile) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", profile);
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -S --noconfirm", profile);
   system(cmd);
 }
 
 void rm(const char* profile) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", profile);
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", profile);
   system(cmd);
 }
 
 void sideload_apply(const char* file) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", file);
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -S --noconfirm", file);
   system(cmd);
 }
 
 void sideload_rm(const char* file) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", file);
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", file);
   system(cmd);
 }
 
