@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
   }
 
   char* action = argv[1];
-  char* profile;
+  char* profile = NULL;
 
   if (argc > 2) {
     profile = argv[2];
