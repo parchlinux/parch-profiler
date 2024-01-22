@@ -7,25 +7,25 @@ char* profiles[] = {
   "development", "/usr/share/parch-profiles/development"
 };
 
-void apply(char* profile) {
+void apply(const char* profile) {
   char cmd[1024];
   sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", profile);
   system(cmd);
 }
 
-void rm(char* profile) {
+void rm(const char* profile) {
   char cmd[1024];
   sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", profile);
   system(cmd);
 }
 
-void sideload_apply(char* file) {
+void sideload_apply(const char* file) {
   char cmd[1024];
   sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", file);
   system(cmd);
 }
 
-void sideload_rm(char* file) {
+void sideload_rm(const char* file) {
   char cmd[1024];
   sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", file);
   system(cmd);
