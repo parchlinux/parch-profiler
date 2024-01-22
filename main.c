@@ -49,7 +49,7 @@ void test() {
 int main(int argc, char** argv) {
 
   if (argc < 2) {
-    printf("Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
+    fprintf(stderr, "Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
     return 1;
   }
 
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
   } else if (strcmp(action, "list") == 0) {
     list();
   } else {
-    printf("Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
+    fprintf(stderr, "Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
     return 1;
   }
 
