@@ -2,32 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* The max size of a command in system() call */
+#define MAX_CMD_LENGTH 1024
+
 char* profiles[] = {
   "gaming", "/usr/share/parch-profiles/gaming",
   "development", "/usr/share/parch-profiles/development"
 };
 
-void apply(char* profile) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", profile);
+void apply(const char* profile) {
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -S --noconfirm", profile);
   system(cmd);
 }
 
-void rm(char* profile) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", profile);
+void rm(const char* profile) {
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", profile);
   system(cmd);
 }
 
-void sideload_apply(char* file) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -S --noconfirm", file);
+void sideload_apply(const char* file) {
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -S --noconfirm", file);
   system(cmd);
 }
 
-void sideload_rm(char* file) {
-  char cmd[1024];
-  sprintf(cmd, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", file);
+void sideload_rm(const char* file) {
+  char cmd[MAX_CMD_LENGTH];
+  snprintf(cmd, MAX_CMD_LENGTH, "cat %s | xargs -d '\\n' paru -Rds --noconfirm", file);
   system(cmd);
 }
 
@@ -46,12 +49,12 @@ void test() {
 int main(int argc, char** argv) {
 
   if (argc < 2) {
-    printf("Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
+    fprintf(stderr, "Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
     return 1;
   }
 
   char* action = argv[1];
-  char* profile;
+  char* profile = NULL;
 
   if (argc > 2) {
     profile = argv[2];
@@ -73,7 +76,7 @@ int main(int argc, char** argv) {
   } else if (strcmp(action, "list") == 0) {
     list();
   } else {
-    printf("Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
+    fprintf(stderr, "Usage: parch-profile [apply|rm|sideload-apply|sideload-rm|test] [args]\n");
     return 1;
   }
 
